@@ -19,7 +19,7 @@ gravidade = 1
 pulo = False
 
 #plataformas
-plataforma1 = Rect((270,500),(100,10))
+plataforma1 = Rect((270,480),(100,10))
 plataforma2 = Rect((50,400),(100,10))
 plataforma3 = Rect((500,400),(100,10))
 plataforma4 = Rect((150,300),(100,10))
@@ -59,22 +59,37 @@ def campeao_mover():
         if gravidade <= 20:
             gravidade += 0.5
 
-    #movimento esquerda e direita
+    #movimento esquerda 
     if(keyboard.left):
         if (campeao.x > 40) and (campeao_x_velocidade > -8):
             campeao_x_velocidade -= 2
+    #movimento direita
     if(keyboard.right):
         if (campeao.x < 580) and (campeao_x_velocidade < 8):
             campeao_x_velocidade += 2
     campeao.x += campeao_x_velocidade
 
+    #Velocidade do campeao
     if campeao_x_velocidade > 0:
         campeao_x_velocidade -= 1
     if campeao_x_velocidade < 0:
             campeao_x_velocidade += 1
-    #code para que o boneco nao saia da tela
+    #code para que o boneco nao saia da tela ao andar
     if campeao.x < 50 or campeao.x > 580:
         campeao_x_velocidade = 0
+
+    #funcao para pular
+    if(keyboard.space) and collidecheck():
+        pulo = True
+        campeao.image = "jump"
+        campeao_y_velocidade = 96
+
+    if pulo and campeao_y_velocidade > 25:
+        campeao_y_velocidade = campeao_y_velocidade - ((100 - campeao_y_velocidade)/2)
+        campeao.y -= campeao_y_velocidade/3 #altura do pulo
+    else:
+        campeao_y_velocidade = 0
+        pulo = False
 
 def collidecheck():
     collide = False
@@ -93,22 +108,3 @@ def backgroundcolorfade():
         azul -= 1
     else:
         azul_afrente = True
-
-
-
-# boneco = Actor('stive.png')
-# boneco.topright = 0, 10
-
-# #funcao fazer o alien e o fundo aparecer
-# def draw():
-#     screen.fill((0, 163, 163))
-#     boneco.draw()
-
-# def update():
-#     boneco.left += 2
-#     if boneco.left > WIDTH:
-#         boneco.right = 0
-
-# def on_mouse_down(pos):
-#     if boneco.collidepoint(pos):
-#         sounds.pulo1.play()
