@@ -67,6 +67,7 @@ def campeao_mover():
     if(keyboard.right):
         if (campeao.x < 580) and (campeao_x_velocidade < 8):
             campeao_x_velocidade += 2
+            campeao.image = "run"
     campeao.x += campeao_x_velocidade
 
     #Velocidade do campeao
@@ -96,6 +97,7 @@ def collidecheck():
     for i in plataformas:
         if campeao.colliderect(i):
             collide = True
+            campeao.image = "stive"
     return collide
 
 def backgroundcolorfade():
