@@ -17,6 +17,7 @@ campeao_x_velocidade = 0
 campeao_y_velocidade = 0
 gravidade = 1
 pulo = False
+pulei = False
 
 #plataformas
 plataforma1 = Rect((270,480),(100,10))
@@ -48,7 +49,11 @@ def update():
     campeao_mover()
 
 def campeao_mover():
-    global campeao_x_velocidade, campeao_y_velocidade, pulo, gravidade
+    global campeao_x_velocidade, campeao_y_velocidade, pulo, gravidade, pulei
+
+    # face para frente
+    if campeao_x_velocidade == 0 and not pulei:
+        campeao.image = "stive"
 
     #gravidade 
     if collidecheck():
@@ -81,10 +86,12 @@ def campeao_mover():
         campeao_x_velocidade = 0
 
     #funcao para pular
-    if(keyboard.space) and collidecheck():
+    if(keyboard.space) and collidecheck() and not pulei:
         pulo = True
+        pulei = True
+        clock.schedule_unique(pulo_continuo, 0.5)
         campeao.image = "jump"
-        campeao_y_velocidade = 96
+        campeao_y_velocidade = 95
 
     if pulo and campeao_y_velocidade > 25:
         campeao_y_velocidade = campeao_y_velocidade - ((100 - campeao_y_velocidade)/2)
@@ -98,9 +105,12 @@ def collidecheck():
     for i in plataformas:
         if campeao.colliderect(i):
             collide = True
-            if(campeao_x_velocidade == 0 and collide == True):
-                campeao.image = "stive"
     return collide
+
+def pulo_continuo():
+    global pulei
+    pulei = False
+
 
 def backgroundcolorfade():
     global azul, azul_afrente
