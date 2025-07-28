@@ -98,7 +98,8 @@ def collidecheck():
     for i in plataformas:
         if campeao.colliderect(i):
             collide = True
-            campeao.image = "stive"
+            if(campeao_x_velocidade == 0 and collide == True):
+                campeao.image = "stive"
     return collide
 
 def backgroundcolorfade():
