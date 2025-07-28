@@ -63,6 +63,7 @@ def campeao_mover():
     if(keyboard.left):
         if (campeao.x > 40) and (campeao_x_velocidade > -8):
             campeao_x_velocidade -= 2
+            campeao.image = "run_left"
     #movimento direita
     if(keyboard.right):
         if (campeao.x < 580) and (campeao_x_velocidade < 8):
