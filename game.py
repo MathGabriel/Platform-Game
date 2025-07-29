@@ -18,20 +18,22 @@ campeao_y_velocidade = 0
 gravidade = 1
 pulo = False
 pulei = False
-
+permitir_x = True
+cronometro = []
 #plataformas
-plataforma1 = Rect((270,480),(100,10))
-plataforma2 = Rect((50,400),(100,10))
-plataforma3 = Rect((500,400),(100,10))
-plataforma4 = Rect((150,300),(100,10))
-plataforma5 = Rect((400,300),(100,10))
-plataforma6 = Rect((100,200),(100,10))
-plataforma7 = Rect((450,200),(100,10))
-plataforma8 = Rect((0,100),(100,10))
-plataforma9 = Rect((510,100),(100,10))
+plataforma1 = Rect((270,480),(80,10))
+# plataforma2 = Rect((50,400),(100,10))
+# plataforma3 = Rect((500,400),(100,10))
+plataforma4 = Rect((150,300),(80,10))
+plataforma5 = Rect((400,300),(80,10))
+plataforma6 = Rect((100,200),(80,10))
+plataforma7 = Rect((450,200),(80,10))
+plataforma8 = Rect((0,80),(80,10))
+plataforma9 = Rect((510,80),(80,10))
 
 #lista de plataformas
-plataformas = [chao,plataforma1,plataforma2,plataforma3,plataforma4,plataforma5,plataforma6,plataforma7,plataforma8,plataforma9]
+# plataformas = [chao,plataforma1,plataforma2,plataforma3,plataforma4,plataforma5,plataforma6,plataforma7,plataforma8,plataforma9]
+plataformas = [chao,plataforma1,plataforma4,plataforma5,plataforma6,plataforma7,plataforma8,plataforma9]
 
 #função de desenho
 def draw():
@@ -49,7 +51,7 @@ def update():
     campeao_mover()
 
 def campeao_mover():
-    global campeao_x_velocidade, campeao_y_velocidade, pulo, gravidade, pulei
+    global campeao_x_velocidade, campeao_y_velocidade, pulo, gravidade, pulei, cronometro, permitir_x
 
     # face para frente
     if campeao_x_velocidade == 0 and not pulei:
@@ -59,10 +61,18 @@ def campeao_mover():
     if collidecheck():
         gravidade = 1
         campeao.y -= 1
+        permitir_x = True
+        cronometro = []
     if not collidecheck():
         campeao.y += gravidade
         if gravidade <= 20:
             gravidade += 0.5
+        cronometro.append(pygame.time.get_ticks())
+        if len(cronometro) > 5 and not pulei:
+            permitir_x = False
+            campeao.image = "jump"
+            if len(cronometro) > 20:
+                campeao.image = "jump_caindo"
 
     #movimento esquerda 
     if(keyboard.left):
