@@ -72,7 +72,9 @@ def campeao_mover():
             permitir_x = False
             campeao.image = "jump"
             if len(cronometro) > 20:
-                campeao.image = "jump_caindo"
+                campeao.image = "jump_caindo_meio"
+                if len(cronometro) > 30:
+                    campeao.image = "jump_caindo"
 
     #movimento esquerda 
     if(keyboard.left):
