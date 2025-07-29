@@ -77,15 +77,19 @@ def campeao_mover():
                     campeao.image = "jump_caindo"
 
     #movimento esquerda 
-    if(keyboard.left):
+    if(keyboard.left) and permitir_x:
         if (campeao.x > 40) and (campeao_x_velocidade > -8):
             campeao_x_velocidade -= 2
             campeao.image = "run_left"
+            if (keyboard.left) and pulei:
+                campeao.image = "run_left"
     #movimento direita
-    if(keyboard.right):
+    if(keyboard.right) and permitir_x:
         if (campeao.x < 580) and (campeao_x_velocidade < 8):
             campeao_x_velocidade += 2
             campeao.image = "run"
+            if (keyboard.right) and pulei:
+                campeao.image = "run"
     campeao.x += campeao_x_velocidade
 
     #Velocidade do campeao
