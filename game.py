@@ -35,6 +35,13 @@ plataforma9 = Rect((510,80),(80,10))
 # plataformas = [chao,plataforma1,plataforma2,plataforma3,plataforma4,plataforma5,plataforma6,plataforma7,plataforma8,plataforma9]
 plataformas = [chao,plataforma1,plataforma4,plataforma5,plataforma6,plataforma7,plataforma8,plataforma9]
 
+# Pontuação
+dinheiro_x = [950,50,850,150,750,250,650,350,500]
+dinheiro_y = [70,70,170,170,270,270,370,370,470]
+d_xy = random.randint(0,8)
+dinheiro = Actor('dinheiro',(dinheiro_x[d_xy],dinheiro_y[d_xy]))
+pontos = 0
+
 #função de desenho
 def draw():
     # screen.fill((0, 163, 163))
