@@ -130,7 +130,10 @@ def campeao_mover():
     #colidindo com o dinheiro
     if campeao.colliderect(dinheiro):
         pontos += 1
+        antigo_din_xy = d_xy
         d_xy = random.randint(0,7)
+        while antigo_din_xy == d_xy:
+            d_xy = random.randint(0,7)
         dinheiro.x = dinheiro_x[d_xy]
         dinheiro.y = dinheiro_y[d_xy]
 
