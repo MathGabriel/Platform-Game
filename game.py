@@ -127,6 +127,13 @@ def campeao_mover():
         campeao_y_velocidade = 0
         pulo = False
 
+    #colidindo com o dinheiro
+    if campeao.colliderect(dinheiro):
+        pontos += 1
+        d_xy = random.randint(0,7)
+        dinheiro.x = dinheiro_x[d_xy]
+        dinheiro.y = dinheiro_y[d_xy]
+
 def collidecheck():
     collide = False
     for i in plataformas:
