@@ -40,7 +40,7 @@ dinheiro_x = [300,200,350,140,490,40,550]
 dinheiro_y = [450,350,50,140,130,60,60]
 d_xy = random.randint(0,7)
 dinheiro = Actor('dinheiro',(dinheiro_x[d_xy],dinheiro_y[d_xy]))
-pontos = 0
+pontos = 00
 print((dinheiro_x[d_xy],dinheiro_y[d_xy]))
 
 #função de desenho
@@ -53,7 +53,8 @@ def draw():
         screen.draw.filled_rect(i,groundcolour)
     campeao.draw()
     dinheiro.draw()
-    screen.draw.text("Dinheiros:", center=(280,20), fontsize=40, shadow=(1,1), color=(255,255,255), scolor="#202020")
+    screen.draw.text("Dinheiros:", center=(270,20), fontsize=40, shadow=(1,1), color=(255,255,255), scolor="#202020")
+    screen.draw.text(str(pontos), center=(359,21), fontsize=40, shadow=(1,1), color=(255,255,255), scolor="#202020")
 
 #funcao ficar atualizando
 def update():
@@ -61,7 +62,7 @@ def update():
     campeao_mover()
 
 def campeao_mover():
-    global campeao_x_velocidade, campeao_y_velocidade, pulo, gravidade, pulei, cronometro, permitir_x
+    global campeao_x_velocidade, campeao_y_velocidade, pulo, gravidade, pulei, cronometro, permitir_x, pontos, d_xy
 
     # face para frente
     if campeao_x_velocidade == 0 and not pulei:
